@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homepage"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotationX="2"
+        android:text="欢迎辣鸡"
+        android:textColor="@color/Home_page_welcome_color"
+        android:textSize="60sp"
+        android:textStyle="italic"
+        android:alpha="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
+
+    <Button
+        android:id="@+id/login"
+        android:background="@drawable/home_page_button_style"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="136dp"
+        android:alpha="0.8"
+        android:text="登录"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/register"
+        android:background="@drawable/home_page_button_style"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="136dp"
+        android:alpha="0.8"
+        android:text="注册"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
