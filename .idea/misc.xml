@@ -6,7 +6,11 @@
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/drawable/home_page_button_action.xml" value="0.342" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2775" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_registration.xml" value="0.4" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/index.xml" value="0.4" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/login.xml" value="0.4" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/registration.xml" value="0.4" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/spinner_layout.xml" value="0.4" />
       </map>
     </option>
   </component>
