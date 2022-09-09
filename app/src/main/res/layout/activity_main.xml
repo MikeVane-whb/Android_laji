@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/homepage"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
 
     <TextView
         android:id="@+id/welcomeText"
+        style="@style/home_page_welcome_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="186dp"
         android:rotationX="2"
         android:text="欢迎辣鸡"
-        style="@style/home_page_welcome_style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.311" />
 
     <Button
         android:id="@+id/login"
-        android:background="@drawable/home_page_button_action"
         style="@style/home_page_style"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/welcomeText"
+        android:background="@drawable/home_page_button_action"
+        android:drawableRight="@mipmap/login"
         android:text="登录"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,12 +37,14 @@
 
     <Button
         android:id="@+id/register"
-        android:background="@drawable/home_page_button_action"
         style="@style/home_page_style"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login"
+        android:background="@drawable/home_page_button_action"
         android:text="注册"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
