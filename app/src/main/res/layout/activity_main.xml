@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotationX="2"
@@ -24,24 +24,16 @@
     <Button
         android:id="@+id/login"
         android:background="@drawable/home_page_button_action"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="136dp"
-        android:alpha="0.8"
+        style="@style/home_page_style"
         android:text="登录"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
     <Button
         android:id="@+id/register"
         android:background="@drawable/home_page_button_action"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="136dp"
-        android:alpha="0.8"
+        style="@style/home_page_style"
         android:text="注册"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
