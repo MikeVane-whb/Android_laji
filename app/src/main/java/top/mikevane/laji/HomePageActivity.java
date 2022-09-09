@@ -8,33 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import top.mikevane.laji.tool.BtnClickListener;
+
 public class HomePageActivity extends AppCompatActivity {
-
-    /**
-     * 按键跳转类
-     */
-    class BtnClickListener implements View.OnClickListener{
-
-        /**
-         * 跳转的活动
-         */
-        private Class<?> targetActivityClass;
-
-
-        public BtnClickListener(Class<?> activityClass) {
-            this.targetActivityClass = activityClass;
-        }
-
-        /**
-         * 指定跳转活动
-         * @param view
-         */
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(HomePageActivity.this,targetActivityClass);
-            startActivity(intent);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +19,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         // 登录按钮事件
         Button loginButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(new BtnClickListener(IndexActivity.class));
+        loginButton.setOnClickListener(new BtnClickListener(this,IndexActivity.class));
 
         // 注册按钮事件
         Button registerButton = findViewById(R.id.register);
-        registerButton.setOnClickListener(new BtnClickListener(RegistrationActivity.class));
+        registerButton.setOnClickListener(new BtnClickListener(this,RegistrationActivity.class));
     }
 
 }
