@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="homeList">
+        <item>崇文路01小区302</item>
+        <item>崇文路01小区602</item>
+        <item>崇文路02小区606</item>
+    </string-array>
+
+</resources>
