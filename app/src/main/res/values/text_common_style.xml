@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--页面字体通用风格封装-->
+<resources>
+    <!--  欢迎字体  -->
+    <style name="home_page_welcome_style">
+
+        <item name="android:textColor">@color/home_page_welcome_color</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:alpha">0.6</item>
+    </style>
+    <!--  登录与注册按钮字体  -->
+    <style name="home_page_style">
+
+    </style>
+</resources>
