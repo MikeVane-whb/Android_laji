@@ -12,9 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BtnClickListener implements View.OnClickListener{
 
     /**
-     * 跳转的活动
+     * 跳转的目标活动
      */
     private Class<?> targetActivityClass;
+
+    /**
+     * 源活动
+     */
     private AppCompatActivity activity;
 
     /**

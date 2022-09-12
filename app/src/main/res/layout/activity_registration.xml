@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/beijing"
+    android:background="@drawable/homepage"
     >
 
     <TextView
-
-        android:id="@+id/textView"
+        android:id="@+id/register_welcome"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="center"
@@ -17,18 +16,20 @@
         android:textSize="34dp" />
 
     <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="手机号"
-            />
+        android:id="@+id/register_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="手机号"
+        />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="383dp"
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/register_code"
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -36,19 +37,17 @@
             android:hint="验证码" />
 
         <Button
+            android:id="@+id/register_send_code"
             android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="30dp"
-            android:text="发送验证码"/>
+            android:text="发送验证码"
+            android:background="@drawable/home_page_button_action"
+            />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
-
-
     <EditText
+        android:id="@+id/register_password"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
@@ -65,12 +64,14 @@
         android:inputType="textPassword"
         />
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/register_register"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="注册" />
+        android:text="注册"
+        android:background="@drawable/home_page_button_action"
+        />
 
 
 </LinearLayout>

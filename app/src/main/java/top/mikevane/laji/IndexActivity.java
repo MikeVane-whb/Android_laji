@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * 信息显示模块
+ */
 public class IndexActivity extends AppCompatActivity {
 
     @Override
