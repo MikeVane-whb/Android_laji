@@ -21,4 +21,5 @@
         <item name="android:layout_marginEnd">136dp</item>
         <item name="android:alpha">0.8</item>
     </style>
+
 </resources>

@@ -5,6 +5,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 
 /**
  * 按钮跳转工具类
@@ -22,14 +24,27 @@ public class BtnClickListener implements View.OnClickListener{
     private AppCompatActivity activity;
 
     /**
+     * 传输的数据
+     */
+    private Map<String,String> message;
+
+    public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass) {
+        this(activity,targetActivityClass,null);
+    }
+
+    /**
      * 构造方法
      * @param activity 当前 activity
      * @param targetActivityClass 目标活动的 class
+     * @param message 需要传输的数据
      */
-    public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass) {
+    public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass, Map<String,String> message) {
         this.targetActivityClass = targetActivityClass;
         this.activity = activity;
+        this.message = message;
     }
+
+
 
     /**
      * 指定跳转活动
