@@ -26,8 +26,8 @@
     <Button
         android:id="@+id/login"
         style="@style/home_page_style"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/welcomeText"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/home_page_button_action"
         android:text="登录"
         android:textSize="18dp"
@@ -37,8 +37,8 @@
     <Button
         android:id="@+id/register"
         style="@style/home_page_style"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/login"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/home_page_button_action"
         android:text="注册"
         android:textSize="18dp"

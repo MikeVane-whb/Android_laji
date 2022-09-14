@@ -1,6 +1,7 @@
 package top.mikevane.laji.tool;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class BtnClickListener implements View.OnClickListener{
      * 传输的数据
      */
     private Map<String,String> message;
+
 
     public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass) {
         this(activity,targetActivityClass,null);
@@ -55,4 +57,6 @@ public class BtnClickListener implements View.OnClickListener{
         Intent intent = new Intent(activity,targetActivityClass);
         activity.startActivity(intent);
     }
+
+
 }

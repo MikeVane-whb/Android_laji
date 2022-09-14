@@ -11,13 +11,14 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/index_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="返回"
             android:background="@drawable/home_page_button_action"
             />
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/index_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
@@ -34,20 +35,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp">
+
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/homeList"/>
+                android:entries="@array/homeList" />
+
             <EditText
                 android:id="@+id/editTextTime2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22/03/04 9:59"
+                android:text="22/03/049:59"
                 android:ems="10"
-                android:inputType="time" />
+                android:inputType="time"
+                android:enabled="false"/>
         </LinearLayout>
        <TextView
+           android:id="@+id/tianqi"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="显示当地天气"/>
@@ -91,19 +96,35 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:orientation="vertical">
             <TextView
+                android:id="@+id/index_temperature"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="实时显示信息"/>
+                android:layout_height="wrap_content"
+                android:text="实时显示信息:温度："
+                android:textSize="30dp"/>
+            <TextView
+                android:id="@+id/index_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实时显示信息:湿度："
+                android:textSize="30dp"/>
+            <TextView
+                android:id="@+id/index_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实时显示信息:亮度："
+                android:textSize="30dp"/>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/index_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,7 +132,7 @@
                 android:background="@drawable/home_page_button_action"/>
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/index_kongTiao"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -119,12 +140,33 @@
                 android:background="@drawable/home_page_button_action"/>
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/index_light2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="灯光"
                 android:background="@drawable/home_page_button_action"/>
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/index_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+                android:background="@drawable/home_page_button_action"
+                />
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
