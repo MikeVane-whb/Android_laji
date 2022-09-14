@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--页面字体通用风格封装-->
+<resources>
+    <!-- 欢迎字体  -->
+    <style name="home_page_welcome_style">
+        <!--   字体颜色     -->
+        <item name="android:textColor">@color/home_page_welcome_color</item>
+        <!--   字体大小     -->
+        <item name="android:textSize">60sp</item>
+        <!--   字体风格     -->
+        <item name="android:textStyle">italic</item>
+        <!--   字体透明度     -->
+        <item name="android:alpha">0.6</item>
+    </style>
+
+    <!--  登录与注册按钮字体  -->
+    <style name="home_page_style">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">75dp</item>
+        <item name="android:layout_marginEnd">136dp</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
+</resources>

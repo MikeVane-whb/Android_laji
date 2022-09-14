@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="Home_page_welcome_color">#283540</color>
-    <color name="Home_page_but_color">#FFFFFF</color>
+    <!--主页面字体颜色-->
+    <color name="home_page_welcome_color">#283540</color>
+    <!--主页面字体颜色-->
+    <color name="home_page_but_text_color"></color>
+    <!--主页面按钮颜色-->
+    <color name="home_page_but_background_color">#FFFFFF</color>
 </resources>

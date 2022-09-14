@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="top.mikevane.laji">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,7 +16,22 @@
         android:theme="@style/Theme.Laji"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".IndexActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="top.mikevane.laji.ACTION_START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomePageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
