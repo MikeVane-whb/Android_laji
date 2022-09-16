@@ -4,20 +4,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class UserInfo implements Parcelable {
+    /**
+     * 主键
+     */
     private Integer id;
+    /**
+     * 用户名
+     */
     private String username;
-    private String password;
+    /**
+     * 用户email
+     */
     private String email;
+    /**
+     * 地址
+     */
     private String address;
+    /**
+     * 用户电话
+     */
     private String phone;
+    /**
+     * 用户头像
+     */
     private String userPhoto;
+    /**
+     * 用户性别
+     */
     private String sex;
 
 
     public UserInfo(Integer id, String username, String password, String email, String address, String phone, String userPhoto, String sex) {
         this.id = id;
         this.username = username;
-        this.password = password;
         this.email = email;
         this.address = address;
         this.phone = phone;
@@ -44,13 +63,6 @@ public class UserInfo implements Parcelable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;
@@ -99,7 +111,6 @@ public class UserInfo implements Parcelable {
             id = in.readInt();
         }
         username = in.readString();
-        password = in.readString();
         email = in.readString();
         address = in.readString();
         phone = in.readString();
@@ -133,7 +144,6 @@ public class UserInfo implements Parcelable {
             parcel.writeInt(id);
         }
         parcel.writeString(username);
-        parcel.writeString(password);
         parcel.writeString(email);
         parcel.writeString(address);
         parcel.writeString(phone);

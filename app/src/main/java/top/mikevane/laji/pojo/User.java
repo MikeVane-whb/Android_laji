@@ -3,23 +3,32 @@ package top.mikevane.laji.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-
-
-
-
+/**
+ * 用户类
+ */
 public class User  implements Parcelable{
+    /**
+     * 主键
+     */
     private Integer id;
-    private String username;
-    private String password;
+    /**
+     * 用户邮箱
+     */
     private String email;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 用户信息id
+     */
     private String userInfoId;
+
     public User() {
     }
 
     public User(Integer id, String username, String password, String email, String userInfoId) {
         this.id = id;
-        this.username = username;
         this.password = password;
         this.email = email;
         this.userInfoId = userInfoId;
@@ -32,7 +41,6 @@ public class User  implements Parcelable{
         } else {
             id = in.readInt();
         }
-        username = in.readString();
         password = in.readString();
         email = in.readString();
         userInfoId=in.readString();
@@ -56,14 +64,6 @@ public class User  implements Parcelable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -104,7 +104,6 @@ public class User  implements Parcelable{
             parcel.writeByte((byte) 1);
             parcel.writeInt(id);
         }
-        parcel.writeString(username);
         parcel.writeString(password);
         parcel.writeString(email);
         parcel.writeString(userInfoId);

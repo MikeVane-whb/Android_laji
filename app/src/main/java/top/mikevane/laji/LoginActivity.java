@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(userNameStr) || TextUtils.isEmpty(userPwdStr)) {
                     Toast.makeText(LoginActivity.this,"空",Toast.LENGTH_LONG).show();
                 }else {
-                    user.setUsername(userNameStr);
                     user.setPassword(userPwdStr);
                     //这里在数据库验证用户密码是否正确并且在数据库中查询返回一个相应user，这里使用假数据，手动设置user的id和email
                     user.setId(1);
