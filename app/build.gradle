@@ -56,5 +56,6 @@ dependencies {
     //jackson驱动
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
 
-
+    //okhttp驱动
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 }

@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import top.mikevane.laji.pojo.User;
-import top.mikevane.laji.tool.BtnClickListener;
+import top.mikevane.laji.tool.BtnClickJumpListener;
 
 /**
  * 信息显示模块

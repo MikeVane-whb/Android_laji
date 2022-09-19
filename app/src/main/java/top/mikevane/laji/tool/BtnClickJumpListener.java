@@ -11,8 +11,9 @@ import java.util.Map;
 
 /**
  * 按钮跳转工具类
+ * @author MikeV
  */
-public class BtnClickListener implements View.OnClickListener{
+public class BtnClickJumpListener implements View.OnClickListener{
 
     /**
      * 跳转的目标活动
@@ -30,7 +31,7 @@ public class BtnClickListener implements View.OnClickListener{
     private Map<String,String> message;
 
 
-    public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass) {
+    public BtnClickJumpListener(AppCompatActivity activity, Class<?> targetActivityClass) {
         this(activity,targetActivityClass,null);
     }
 
@@ -40,7 +41,7 @@ public class BtnClickListener implements View.OnClickListener{
      * @param targetActivityClass 目标活动的 class
      * @param message 需要传输的数据
      */
-    public BtnClickListener(AppCompatActivity activity, Class<?> targetActivityClass, Map<String,String> message) {
+    public BtnClickJumpListener(AppCompatActivity activity, Class<?> targetActivityClass, Map<String,String> message) {
         this.targetActivityClass = targetActivityClass;
         this.activity = activity;
         this.message = message;

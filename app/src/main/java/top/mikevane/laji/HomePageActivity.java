@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import top.mikevane.laji.tool.BtnClickListener;
+import top.mikevane.laji.tool.BtnClickJumpListener;
 import top.mikevane.laji.tool.JDBCUtil;
 
 /**
@@ -30,11 +30,11 @@ public class HomePageActivity extends AppCompatActivity {
 
         // 登录按钮事件
         Button loginButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(new BtnClickListener(this,LoginActivity.class));
+        loginButton.setOnClickListener(new BtnClickJumpListener(this,LoginActivity.class));
 
         // 注册按钮事件
         Button registerButton = findViewById(R.id.register);
-        registerButton.setOnClickListener(new BtnClickListener(this,RegistrationActivity.class));
+        registerButton.setOnClickListener(new BtnClickJumpListener(this,RegistrationActivity.class));
     }
 
 }

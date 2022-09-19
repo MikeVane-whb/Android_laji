@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import top.mikevane.laji.pojo.User;
 import top.mikevane.laji.pojo.UserInfo;
-import top.mikevane.laji.tool.BtnClickListener;
+import top.mikevane.laji.tool.BtnClickJumpListener;
 
 /**
  * 用户详情界面
+ * @author MikeV
  */
 
 public class UserInfoActivity extends AppCompatActivity {
@@ -44,9 +45,9 @@ public class UserInfoActivity extends AppCompatActivity {
         //修改密码事件
 
         // 返回事件
-        userInfoBackBtn.setOnClickListener(new BtnClickListener(this,IndexActivity.class));
+        userInfoBackBtn.setOnClickListener(new BtnClickJumpListener(this,IndexActivity.class));
         //退出账号
-        userInfo_exitLoginBtn.setOnClickListener(new BtnClickListener(this,HomePageActivity.class));
+        userInfo_exitLoginBtn.setOnClickListener(new BtnClickJumpListener(this,HomePageActivity.class));
     }
 
 

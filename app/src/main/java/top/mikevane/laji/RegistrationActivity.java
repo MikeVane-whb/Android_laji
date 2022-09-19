@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import top.mikevane.laji.tool.BtnClickListener;
+import top.mikevane.laji.tool.BtnClickJumpListener;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         // 注册按钮事件
         Button registerButton = findViewById(R.id.register_register);
-        registerButton.setOnClickListener(new BtnClickListener(this,LoginActivity.class));
+        registerButton.setOnClickListener(new BtnClickJumpListener(this,LoginActivity.class));
 
         // 发送验证码事件
         Button codeButton = findViewById(R.id.register_send_code);
