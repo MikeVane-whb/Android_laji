@@ -2,7 +2,6 @@ package top.mikevane.laji;
 
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import top.mikevane.laji.pojo.User;
 import top.mikevane.laji.pojo.UserInfo;
-import top.mikevane.laji.tool.BtnClickJumpListener;
+import top.mikevane.laji.utils.BtnClickJumpListener;
 
 /**
  * 用户详情界面

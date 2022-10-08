@@ -122,7 +122,7 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/index_temperature"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="实时显示信息:温度："

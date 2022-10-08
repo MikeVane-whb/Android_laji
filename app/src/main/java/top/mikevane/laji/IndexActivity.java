@@ -1,30 +1,30 @@
 package top.mikevane.laji;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import top.mikevane.laji.pojo.RoomInfo;
 import top.mikevane.laji.pojo.User;
-import top.mikevane.laji.pojo.UserInfo;
 import top.mikevane.laji.socket.TcpClient;
-import top.mikevane.laji.tool.BtnClickJumpListener;
 import top.mikevane.laji.utils.DateUtils;
 
 /**
@@ -88,6 +88,14 @@ public class IndexActivity extends AppCompatActivity {
      * 自定义监听器
      */
     IndexActivityClicker clicker = new IndexActivityClicker();
+    /**
+     * 自定义handler，用于异步通信
+     */
+    IndexActivityHandler handler = new IndexActivityHandler(this);
+    /**
+     * 自定义广播，用于接收数据
+     */
+    private IndexActivityReceiver indexActivityReceiver = new IndexActivityReceiver();
 
     /**
      * 点击事件类，封装各种点击事件处理
@@ -134,7 +142,54 @@ public class IndexActivity extends AppCompatActivity {
      * 使用handler进行异步通信
      */
     private class IndexActivityHandler extends Handler{
+        /**
+         * 弱引用指向IndexActivity活动
+         */
+        private WeakReference<IndexActivity> weakReference;
 
+        IndexActivityHandler(IndexActivity indexActivity){
+            weakReference = new WeakReference<IndexActivity>(indexActivity);
+        }
+
+        /**
+         * 向IndexActivity发送消息
+         * @param msg
+         */
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if(weakReference != null){
+                switch (msg.what){
+                    case 1:
+                        temperature.setText("温度："+msg.obj.toString());
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 广播，监听是否有信息发送
+     */
+    private class IndexActivityReceiver extends BroadcastReceiver {
+
+        /**
+         * 接收发送的信息
+         * @param context 上下文，用于传输从服务器接收到的数据
+         * @param intent 承载部分标识字符串
+         */
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String mAction = intent.getAction();
+            switch (mAction){
+                case "tcpClientReceiver":
+                    String msg = intent.getStringExtra("tcpClientReceiver");
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    message.obj = msg;
+                    handler.sendMessage(message);
+                    break;
+            }
+        }
     }
 
     @Override
@@ -144,6 +199,7 @@ public class IndexActivity extends AppCompatActivity {
 
         bindId();
         bindListener();
+        bindReceiver();
         initView();
 
         User user = (User)getIntent().getParcelableExtra("user");
@@ -155,6 +211,11 @@ public class IndexActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 初始化页面
+     * @param user
+     * @param roomInfo
+     */
     private void showInfo(User user,RoomInfo roomInfo){
         String nowTime = DateUtils.formateDateTime(new Date());
         //index_title.setText(user.getUsername()+"的家");
@@ -170,7 +231,7 @@ public class IndexActivity extends AppCompatActivity {
      */
     private void initView(){
         user = new User();
-
+        context = this;
         //连接按钮亮起，关闭按钮熄灭
         connectBtn.setEnabled(true);
         closeBtn.setEnabled(false);
@@ -198,5 +259,13 @@ public class IndexActivity extends AppCompatActivity {
         closeBtn.setOnClickListener(clicker);
         connectBtn.setOnClickListener(clicker);
         toUserINfoBtn.setOnClickListener(clicker);
+    }
+
+    /**
+     * 绑定广播接收器
+     */
+    private void bindReceiver(){
+        IntentFilter intentFilter = new IntentFilter("tcpClientReceiver");
+        registerReceiver(indexActivityReceiver,intentFilter);
     }
 }

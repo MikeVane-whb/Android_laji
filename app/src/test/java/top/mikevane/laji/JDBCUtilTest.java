@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import top.mikevane.laji.pojo.User;
-import top.mikevane.laji.tool.JDBCUtil;
+import top.mikevane.laji.utils.JDBCUtil;
 
 public class JDBCUtilTest {
     /**

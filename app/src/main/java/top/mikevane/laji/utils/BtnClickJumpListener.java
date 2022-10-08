@@ -1,4 +1,4 @@
-package top.mikevane.laji.tool;
+package top.mikevane.laji.utils;
 
 import android.content.Intent;
 import android.os.Bundle;
