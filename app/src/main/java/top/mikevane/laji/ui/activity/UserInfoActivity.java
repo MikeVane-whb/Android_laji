@@ -1,4 +1,4 @@
-package top.mikevane.laji;
+package top.mikevane.laji.ui.activity;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import top.mikevane.laji.R;
 import top.mikevane.laji.pojo.UserInfo;
-import top.mikevane.laji.utils.BtnClickJumpListener;
+import top.mikevane.laji.ui.listener.BtnClickJumpListener;
 
 /**
  * 用户详情界面
  * @author MikeV
  */
 
-public class UserInfoActivity extends AppCompatActivity {
+public class UserInfoActivity extends BaseActivity {
     private ImageView userPhoto;
     private TextView userInfoView;
     private EditText userInfo_userName,userInfo_sex,userInfo_email,userInfo_phone,userInfo_address;

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * DengYu
  */
-public class DateUtils {
+public class DateUtil {
     /**
      * 对指定的date对象进行格式化
      * @param date

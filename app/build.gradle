@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 29
 
     defaultConfig {
         applicationId "top.mikevane.laji"
         minSdk 23
-        targetSdk 32
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
@@ -31,6 +31,9 @@ android {
                 srcDirs 'src\\main\\assets', 'src\\main\\res\\assets'
             }
         }
+    }
+    testOptions{
+        unitTests.returnDefaultValues = true
     }
 }
 

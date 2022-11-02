@@ -1,4 +1,4 @@
-package top.mikevane.laji.utils;
+package top.mikevane.laji.ui.listener;
 
 import android.content.Intent;
 import android.os.Bundle;

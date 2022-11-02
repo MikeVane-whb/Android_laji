@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * DengYu
  */
-public class UUIDUtils {
+public class UUIDUtil {
     public static String getUUID(){
         return UUID.randomUUID().toString().replace("-", "");
     }

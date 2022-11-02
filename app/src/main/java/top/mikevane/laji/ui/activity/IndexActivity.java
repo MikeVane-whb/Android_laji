@@ -1,4 +1,4 @@
-package top.mikevane.laji;
+package top.mikevane.laji.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,19 +19,23 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
+import top.mikevane.laji.R;
+import top.mikevane.laji.manager.ThreadPoolManager;
 import top.mikevane.laji.pojo.RoomInfo;
 import top.mikevane.laji.pojo.User;
 import top.mikevane.laji.socket.TcpClient;
-import top.mikevane.laji.utils.DateUtils;
+import top.mikevane.laji.utils.DateUtil;
 
 /**
  * 信息显示模块
  * @author MikeV
  */
-public class IndexActivity extends AppCompatActivity {
+public class IndexActivity extends BaseActivity {
 
     /**
      * 标签，用于日志
@@ -47,7 +51,7 @@ public class IndexActivity extends AppCompatActivity {
     /**
      * 跳转“我的”按钮
      */
-    private Button toUserINfoBtn;
+    private Button toUserInfoBtn;
     /**
      * connect按钮
      */
@@ -83,7 +87,7 @@ public class IndexActivity extends AppCompatActivity {
     /**
      * 线程池
      */
-    ExecutorService exec = Executors.newCachedThreadPool();
+    ExecutorService exec = ThreadPoolManager.getInstance();
     /**
      * 自定义监听器
      */
@@ -217,7 +221,7 @@ public class IndexActivity extends AppCompatActivity {
      * @param roomInfo
      */
     private void showInfo(User user,RoomInfo roomInfo){
-        String nowTime = DateUtils.formateDateTime(new Date());
+        String nowTime = DateUtil.formateDateTime(new Date());
         //index_title.setText(user.getUsername()+"的家");
         //房间信息
         light.setText("亮度："+roomInfo.getLight());
@@ -241,7 +245,7 @@ public class IndexActivity extends AppCompatActivity {
      * 绑定id与控件
      */
     private void bindId(){
-        toUserINfoBtn = findViewById(R.id.index_user);
+        toUserInfoBtn = findViewById(R.id.index_user);
         connectBtn = findViewById(R.id.index_connect_device);
         closeBtn = findViewById(R.id.index_close_device);
         serverIp = findViewById(R.id.index_device_ip);
@@ -258,13 +262,14 @@ public class IndexActivity extends AppCompatActivity {
     private void bindListener(){
         closeBtn.setOnClickListener(clicker);
         connectBtn.setOnClickListener(clicker);
-        toUserINfoBtn.setOnClickListener(clicker);
+        toUserInfoBtn.setOnClickListener(clicker);
     }
 
     /**
      * 绑定广播接收器
      */
     private void bindReceiver(){
+        // 添加action，这里的action由 TcpClient 设置
         IntentFilter intentFilter = new IntentFilter("tcpClientReceiver");
         registerReceiver(indexActivityReceiver,intentFilter);
     }

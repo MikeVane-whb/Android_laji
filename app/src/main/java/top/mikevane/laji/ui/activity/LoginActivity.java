@@ -1,4 +1,4 @@
-package top.mikevane.laji;
+package top.mikevane.laji.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import top.mikevane.laji.R;
 import top.mikevane.laji.pojo.User;
 
 /**
  * 信息显示模块
+ * @author MikeV
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     public EditText userName;
     public EditText userPwd;
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         userName =  findViewById(R.id.login_userName);
         userPwd =  findViewById(R.id.login_Password);
         loginBtn= findViewById(R.id.login_login);
-         user = new User();
+        user = new User();
         remembCB=findViewById(R.id.rememb);
     }
 

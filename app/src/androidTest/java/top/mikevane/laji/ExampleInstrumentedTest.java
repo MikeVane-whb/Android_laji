@@ -1,6 +1,7 @@
 package top.mikevane.laji;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -22,5 +23,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("top.mikevane.laji", appContext.getPackageName());
+        Log.e("ExampleInstrumentedTest","123456");
     }
 }

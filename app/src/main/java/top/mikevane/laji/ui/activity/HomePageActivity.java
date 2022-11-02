@@ -1,22 +1,28 @@
-package top.mikevane.laji;
+package top.mikevane.laji.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
-import top.mikevane.laji.utils.BtnClickJumpListener;
+import top.mikevane.laji.R;
+import top.mikevane.laji.ui.listener.BtnClickJumpListener;
+import top.mikevane.laji.utils.ToastUtil;
 
 /**
  * 开始页面
+ * @author MikeV
  */
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_activity);
+
+        ToastUtil.success(this,"这是主页面");
 
         // 登录按钮事件
         Button loginButton = findViewById(R.id.login);
