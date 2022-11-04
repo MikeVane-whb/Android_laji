@@ -10,7 +10,7 @@ public class CodeConstant {
     /**
      * 客户端请求错误
      */
-    public static final Integer CLIENT_ERROR = 555;
+    public static final Integer CLIENT_ERROR = 404;
     /**
      * 服务端请求错误
      */

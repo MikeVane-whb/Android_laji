@@ -9,7 +9,7 @@ public class HttpConstant {
     /**
      * 主机地址
      */
-    public static final String BASE_URL = "http://localhost:8080/laji";
+    public static final String BASE_URL = "http://192.168.56.1:8080/laji";
     /**
      * 发送验证码请求 uri
      */

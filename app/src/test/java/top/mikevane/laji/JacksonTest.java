@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import top.mikevane.laji.pojo.ResponseResult;
+import top.mikevane.laji.utils.JsonUtil;
 
 /**
  * @Author mikevane
@@ -34,9 +35,9 @@ public class JacksonTest {
                 if (o instanceof LinkedHashMap){
                     LinkedHashMap linkedHashMap = (LinkedHashMap) o;
                     Set keySet = linkedHashMap.keySet();
-//                    for (Object o1 : keySet) {
-//                        System.out.println(o1 + " : " + linkedHashMap.get(o1));
-//                    }
+                    for (Object o1 : keySet) {
+                        System.out.println(o1 + " : " + linkedHashMap.get(o1));
+                    }
                     System.out.println(s1 + ":" + linkedHashMap.toString());
                 }
                 if (o instanceof String){
@@ -53,11 +54,12 @@ public class JacksonTest {
      * 测试将返回的json数据转换为对象
      */
     @Test
-    public void responseResultTest(){
+    public void responseResultTest() throws JsonProcessingException {
         String s = "{\"code\":1,\"msg\":null,\"data\":{\"id\":1,\"email\":\"1312706383@qq.com\",\"password\":\"123456\",\"userInfoId\":\"1\"},\"map\":{}}";
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            ResponseResult responseResult = objectMapper.readValue(s, ResponseResult.class);
+            ResponseResult responseResult = JsonUtil.jsonToResponseRes("{\"code\":1,\"msg\":null,\"data\":{\"id\":1,\"email\":\"1312706383@qq.com\",\"password\":\"123456\",\"userInfoId\":\"1\"},\"map\":{}}");
+            LinkedHashMap<String,String> data = (LinkedHashMap<String, String>) responseResult.getData();
+            System.out.println(data.get("email"));
             System.out.println(responseResult);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

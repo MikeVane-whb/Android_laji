@@ -22,7 +22,7 @@ public class HomePageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page_activity);
 
-        ToastUtil.success(this,"这是主页面");
+        ToastUtil.successMsg(this,"这是主页面");
 
         // 登录按钮事件
         Button loginButton = findViewById(R.id.login);
