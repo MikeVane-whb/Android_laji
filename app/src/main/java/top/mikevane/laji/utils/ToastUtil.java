@@ -2,6 +2,7 @@ package top.mikevane.laji.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +63,17 @@ public class ToastUtil {
      * @param showTime
      */
     public static void showMsg(Activity activity, String msg, int showTime){
-        // 获取 toast 对象
-        Toast toast = Toast.makeText(activity, msg, showTime);
-        showToast(toast,ToastConstant.DEFAULT_FLAG);
+        try{
+            // 获取 toast 对象
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.DEFAULT_FLAG);
+        }catch (Exception e){
+            Looper.prepare();
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.DEFAULT_FLAG);
+            Looper.loop();
+        }
+
     }
 
     public static void showMsg(Activity activity, String msg){
@@ -78,9 +87,16 @@ public class ToastUtil {
      * @param showTime toast 提示的时间
      */
     public static void successMsg(Activity activity, String msg, int showTime){
-        // 获取 toast 对象
-        Toast toast = Toast.makeText(activity, msg, showTime);
-        showToast(toast,ToastConstant.SUCCESS_FLAG);
+        try {
+            // 获取 toast 对象
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.SUCCESS_FLAG);
+        }catch (Exception e){
+            Looper.prepare();
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.SUCCESS_FLAG);
+            Looper.loop();
+        }
     }
 
     public static void successMsg(Activity activity, String msg){
@@ -94,9 +110,16 @@ public class ToastUtil {
      * @param showTime toast 提示的时间
      */
     public static void errorMsg(Activity activity, String msg, int showTime){
-        // 获取 toast 对象
-        Toast toast = Toast.makeText(activity, msg, showTime);
-        showToast(toast,ToastConstant.ERROR_FLAG);
+        try {
+            // 获取 toast 对象
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.ERROR_FLAG);
+        }catch (Exception e){
+            Looper.prepare();
+            Toast toast = Toast.makeText(activity, msg, showTime);
+            showToast(toast,ToastConstant.ERROR_FLAG);
+            Looper.loop();
+        }
     }
 
     public static void errorMsg(Activity activity, String msg){

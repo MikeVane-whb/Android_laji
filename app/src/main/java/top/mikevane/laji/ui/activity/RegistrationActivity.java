@@ -1,7 +1,6 @@
 package top.mikevane.laji.ui.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +23,7 @@ import top.mikevane.laji.manager.ThreadPoolManager;
 import top.mikevane.laji.pojo.ResponseResult;
 import top.mikevane.laji.ui.listener.BtnClickJumpListener;
 import top.mikevane.laji.utils.RequestUtil;
+import top.mikevane.laji.utils.StringUtil;
 import top.mikevane.laji.utils.ToastUtil;
 
 /**
@@ -32,7 +31,16 @@ import top.mikevane.laji.utils.ToastUtil;
  */
 public class RegistrationActivity extends BaseActivity {
 
+    /**
+     * 手机号已存在标识符，用于异步处理
+     */
     public static final int PHONE_IS_EXIST = 0;
+
+    /**
+     * 发送邮件标识符，用于异步处理
+     */
+    public static final int SEND_CODE = 1;
+
 
     /**
      * 上下文，用于传输数据
@@ -91,6 +99,30 @@ public class RegistrationActivity extends BaseActivity {
               case PHONE_IS_EXIST:
                   ToastUtil.showMsg(RegistrationActivity.this,"手机号已存在");
                   break;
+              case SEND_CODE:
+                  String sendCodeUrl = HttpConstant.BASE_URL + HttpConstant.SEND_CODE;
+                  RequestUtil.sendPostRequest(sendCodeUrl, null, new RequestCallback() {
+                      @Override
+                      public void getResult(ResponseResult responseResult) {
+                          // 获取状态码
+                          Integer code = responseResult.getCode();
+                          // 获取数据
+                          String data = (String)responseResult.getData();
+                          // 如果发送请求失败
+                          if(CodeConstant.CLIENT_ERROR.equals(code)){
+                              ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
+                          }
+                          // 如果服务器出现错误
+                          if(CodeConstant.SERVER_ERROR.equals(code)){
+                              ToastUtil.errorMsg(RegistrationActivity.this,"服务器故障");
+                          }
+                          // 如果请求发送成功
+                          if(CodeConstant.SERVER_SUCCESS.equals(code)){
+                              ToastUtil.showMsg(RegistrationActivity.this,data);
+                          }
+                      }
+                  });
+                  break;
               default:
                   break;
           }
@@ -110,54 +142,69 @@ public class RegistrationActivity extends BaseActivity {
             switch (v.getId()){
                 // 如果点击了发送验证码按钮
                 case R.id.register_send_code:
-                    Map<String,String> map = new HashMap<>();
-                    // 获取输入的手机号
-                    map.put("phone",registerPhone.getText().toString());
-                    // 发送请求，确定手机是否已注册
-                    String selectPhoneUrl = HttpConstant.BASE_URL + HttpConstant.SELECT_PHONE;
-                    RequestUtil.sendPostRequest(selectPhoneUrl, map, responseResult -> {
-                        // 获取状态码
-                        Integer code = responseResult.getCode();
-                        // 获取数据
-                        Integer dataCount = (Integer)responseResult.getData();
-                        // 如果发送请求失败
-                        if(CodeConstant.CLIENT_ERROR.equals(code)){
-                            ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
-                        }
-                        // 如果服务器出现错误
-                        if(CodeConstant.SERVER_ERROR.equals(code)){
-                            ToastUtil.errorMsg(RegistrationActivity.this,"服务器故障");
-                        }
-                        // 如果请求发送成功
-                        if(CodeConstant.SERVER_SUCCESS.equals(code)){
-                            // 如果手机号已存在
-                            if(dataCount > 0){
-                                threadPoolManager.execute(()->{
-                                    //通过异步消息处理机制，解决了在子线程中进行UI操作的问题
-                                    Message message = new Message();
-                                    message.what = PHONE_IS_EXIST;
-                                    handler.sendMessage(message);
-                                });
-                                phoneIsExist = true;
-                            }
-                            else{
-                                phoneIsExist = false;
-                            }
-                        }
-                    });
-                    // 如果手机不存在，则发送请求验证码
-                    String sendCodeUrl = HttpConstant.BASE_URL + HttpConstant.SEND_CODE;
-                    if(!phoneIsExist){
-                        RequestUtil.sendPostRequest(sendCodeUrl, null, new RequestCallback() {
-                            @Override
-                            public void getResult(ResponseResult responseResult) {
-
-                            }
-                        });
-                    };
+                    // 防空与鉴别手机格式
+                    if (StringUtil.getInstance().isNullOrEmpty(registerPhone.getText().toString())){
+                        // 如果手机为空
+                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号不能为空");
+                    }else if(!StringUtil.getInstance().isPhone(registerPhone.getText().toString())){
+                        // 如果手机格式有误
+                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号格式有误");
+                    }else {
+                        phoneIsRegister();
+                    }
                     break;
             }
         }
+
+        /**
+         * 判断手机是否被注册
+         * 如果已被注册则显示失败 toast
+         * 否则，发送验证码请求
+         * 否则为 false;
+         */
+        private void phoneIsRegister(){
+            Map<String,String> map = new HashMap<>(5);
+            // 获取输入的手机号
+            map.put("phone",registerPhone.getText().toString());
+            // 发送请求，确定手机是否已注册
+            String selectPhoneUrl = HttpConstant.BASE_URL + HttpConstant.SELECT_PHONE;
+            RequestUtil.sendPostRequest(selectPhoneUrl, map, responseResult -> {
+                // 获取状态码
+                Integer code = responseResult.getCode();
+                // 获取数据
+                Integer dataCount = (Integer)responseResult.getData();
+                // 如果发送请求失败
+                if(CodeConstant.CLIENT_ERROR.equals(code)){
+                    ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
+                }
+                // 如果服务器出现错误
+                if(CodeConstant.SERVER_ERROR.equals(code)){
+                    ToastUtil.errorMsg(RegistrationActivity.this,"服务器故障");
+                }
+                // 如果请求发送成功
+                if(CodeConstant.SERVER_SUCCESS.equals(code)){
+                    // 如果手机号已存在
+                    if(dataCount > 0){
+                        threadPoolManager.execute(()->{
+                            // 通过异步消息处理机制，解决了在子线程中进行UI操作的问题
+                            Message message = new Message();
+                            message.what = PHONE_IS_EXIST;
+                            handler.sendMessage(message);
+                        });
+                    }
+                    // 如果手机不存在，发送验证码请求
+                    else{
+                        threadPoolManager.execute(()->{
+                            // 手机确定不存在后，发送验证码请求
+                            Message message = new Message();
+                            message.what = SEND_CODE;
+                            handler.sendMessage(message);
+                        });
+                    }
+                }
+            });
+        }
+
     }
 
 

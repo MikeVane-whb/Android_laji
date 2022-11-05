@@ -18,7 +18,7 @@ public final class ThreadPoolManager extends ThreadPoolExecutor {
         // 经过测试华为荣耀手机不能超过 300 个线程，否则会出现内存溢出
         // java.lang.OutOfMemoryError：pthread_create (1040KB stack) failed: Out of memory
         // 由于应用自身占用了一些线程数，故减去 300 - 100 = 200 个
-        super(10, 200,
+        super(0, 200,
                 30L, TimeUnit.MILLISECONDS,
                 new SynchronousQueue<>());
     }
