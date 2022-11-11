@@ -3,6 +3,9 @@ package top.mikevane.laji.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * @author MikeV
+ */
 public class UserInfo implements Parcelable {
     /**
      * 主键
@@ -16,10 +19,6 @@ public class UserInfo implements Parcelable {
      * 用户email
      */
     private String email;
-    /**
-     * 地址
-     */
-    private String address;
     /**
      * 用户电话
      */
@@ -38,7 +37,6 @@ public class UserInfo implements Parcelable {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.address = address;
         this.phone = phone;
         this.userPhoto = userPhoto;
         this.sex = sex;
@@ -70,14 +68,6 @@ public class UserInfo implements Parcelable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhone() {
@@ -112,7 +102,6 @@ public class UserInfo implements Parcelable {
         }
         username = in.readString();
         email = in.readString();
-        address = in.readString();
         phone = in.readString();
         userPhoto = in.readString();
         sex = in.readString();
@@ -145,7 +134,6 @@ public class UserInfo implements Parcelable {
         }
         parcel.writeString(username);
         parcel.writeString(email);
-        parcel.writeString(address);
         parcel.writeString(phone);
         parcel.writeString(userPhoto);
         parcel.writeString(sex);

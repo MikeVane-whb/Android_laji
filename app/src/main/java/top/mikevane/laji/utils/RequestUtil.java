@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import lombok.SneakyThrows;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -48,6 +49,7 @@ public class RequestUtil {
      * @param <T> 泛型，上限为 Map
      * @return 返回 Call 对象，由其他模块选择后续操作
      */
+    @SneakyThrows
     public static <T extends Map<String,String>> void sendPostRequest(String url, T map, RequestCallback requestCallback){
         // 将需要传入的数据放到 jsonObject 中
         JSONObject jsonObject = new JSONObject();
@@ -61,9 +63,11 @@ public class RequestUtil {
                 }
             }
         }
+        String sessionId = jsonObject.isNull("sessionId") ? "" : jsonObject.getString("sessionId");
         // 创建请求体
         RequestBody requestBody = RequestBody.create(HEADER_CONTENT_TYPE, String.valueOf(jsonObject));
         Request request = new Request.Builder()
+                .addHeader("Cookie","JSESSIONID=" + sessionId)
                 .url(url)
                 .post(requestBody)
                 .build();
@@ -85,10 +89,13 @@ public class RequestUtil {
                 // 封装类，用于接收返回数据
                 ResponseResult responseResult;
                 // 请求失败，服务器返回404
-                if(code == CodeConstant.CLIENT_ERROR){
+                if (code == CodeConstant.CLIENT_ERROR){
                     responseResult = new ResponseResult();
                     responseResult.setCode(CodeConstant.CLIENT_ERROR);
                     responseResult.setMsg("请求失败");
+                }
+                if (code == CodeConstant.SERVER_ERROR){
+                    responseResult = (ResponseResult) JsonUtil.jsonToMap(response.body().string());
                 }
                 else{
                     // 请求成功，将响应体 json 转换为封装类

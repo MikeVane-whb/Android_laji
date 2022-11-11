@@ -26,6 +26,11 @@ public class ResponseResult {
     private Object data;
 
     /**
+     * sessionId
+     */
+    private String sessionId;
+
+    /**
      * 动态数据
      */
     private Map map = new HashMap();
@@ -69,12 +74,21 @@ public class ResponseResult {
         this.msg = msg;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
     @Override
     public String toString() {
         return "ResponseResult{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
+                ", sessionId='" + sessionId + '\'' +
                 ", map=" + map +
                 '}';
     }

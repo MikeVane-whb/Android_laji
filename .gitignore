@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/java/top/mikevane/laji/constant/HttpConstant.java
+/main/java/top/mikevane/laji/constant/

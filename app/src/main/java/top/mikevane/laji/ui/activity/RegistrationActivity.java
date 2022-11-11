@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +34,8 @@ import top.mikevane.laji.utils.ToastUtil;
  */
 public class RegistrationActivity extends BaseActivity {
 
+    private static final String TAG = "RegistrationActivity";
+
     /**
      * 手机号已存在标识符，用于异步处理
      */
@@ -46,7 +51,7 @@ public class RegistrationActivity extends BaseActivity {
      * 上下文，用于传输数据
      */
     @SuppressLint("StaticFieldLeak")
-    public static Context context ;
+    public static Context context;
 
     /**
      * 手机号
@@ -89,7 +94,7 @@ public class RegistrationActivity extends BaseActivity {
     private ThreadPoolManager threadPoolManager = ThreadPoolManager.getInstance();
 
     /**
-     * 异步更新ui
+     * 异步操作
      */
     private Handler handler = new Handler(){
         @Override
@@ -100,26 +105,33 @@ public class RegistrationActivity extends BaseActivity {
                   ToastUtil.showMsg(RegistrationActivity.this,"手机号已存在");
                   break;
               case SEND_CODE:
+                  Log.i(TAG,"发送验证码请求");
+                  // 用于将 session 存入到 SharedPreferences 中
                   String sendCodeUrl = HttpConstant.BASE_URL + HttpConstant.SEND_CODE;
-                  RequestUtil.sendPostRequest(sendCodeUrl, null, new RequestCallback() {
-                      @Override
-                      public void getResult(ResponseResult responseResult) {
-                          // 获取状态码
-                          Integer code = responseResult.getCode();
-                          // 获取数据
-                          String data = (String)responseResult.getData();
-                          // 如果发送请求失败
-                          if(CodeConstant.CLIENT_ERROR.equals(code)){
-                              ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
-                          }
-                          // 如果服务器出现错误
-                          if(CodeConstant.SERVER_ERROR.equals(code)){
-                              ToastUtil.errorMsg(RegistrationActivity.this,"服务器故障");
-                          }
-                          // 如果请求发送成功
-                          if(CodeConstant.SERVER_SUCCESS.equals(code)){
-                              ToastUtil.showMsg(RegistrationActivity.this,data);
-                          }
+                  // 携带手机号发送验证码请求
+                  String phone = registerPhone.getText().toString();
+                  HashMap<String,String> emailMap = new HashMap<>(2);
+                  emailMap.put("phone",phone);
+                  RequestUtil.sendPostRequest(sendCodeUrl, emailMap, responseResult ->  {
+                      // 获取状态码
+                      Integer code = responseResult.getCode();
+                      // 获取数据
+                      String data = (String)responseResult.getData();
+                      // 如果发送请求失败
+                      if(CodeConstant.CLIENT_ERROR.equals(code)){
+                          ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
+                      }
+                      // 如果服务器出现错误
+                      if(CodeConstant.SERVER_ERROR.equals(code)){
+                          ToastUtil.errorMsg(RegistrationActivity.this,responseResult.getMsg());
+                      }
+                      // 如果请求发送成功
+                      if(CodeConstant.SERVER_SUCCESS.equals(code)){
+                          SharedPreferences.Editor sessionSharedEdit = getSharedPreferences("session",MODE_PRIVATE).edit();
+                          // 将 session 存入本地
+                          sessionSharedEdit.putString(phone,data);
+                          sessionSharedEdit.commit();
+                          ToastUtil.showMsg(RegistrationActivity.this,responseResult.getMsg());
                       }
                   });
                   break;
@@ -129,6 +141,9 @@ public class RegistrationActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 按钮点击事件
+     */
     private class RegistrationActivityClicker implements View.OnClickListener{
 
         /**
@@ -142,16 +157,65 @@ public class RegistrationActivity extends BaseActivity {
             switch (v.getId()){
                 // 如果点击了发送验证码按钮
                 case R.id.register_send_code:
+                    Log.i(TAG,"点击了发送验证码按钮");
                     // 防空与鉴别手机格式
+                    // 如果手机为空
                     if (StringUtil.getInstance().isNullOrEmpty(registerPhone.getText().toString())){
-                        // 如果手机为空
                         ToastUtil.errorMsg(RegistrationActivity.this,"手机号不能为空");
-                    }else if(!StringUtil.getInstance().isPhone(registerPhone.getText().toString())){
-                        // 如果手机格式有误
-                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号格式有误");
-                    }else {
-                        phoneIsRegister();
+                        return;
                     }
+                    // 如果手机格式有误
+//                    if (!StringUtil.getInstance().isPhone(registerPhone.getText().toString())){
+//                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号格式有误");
+//                        return;
+//                    }
+                    phoneIsRegister();
+                    break;
+                // 如果点击了注册按钮
+                case R.id.register_register:
+                    Log.i(TAG,"点击了注册按钮");
+                    String phone = registerPhone.getText().toString();
+                    String code = registerCode.getText().toString();
+                    String password = registerPassword.getText().toString();
+                    String confirmPassword = registerConfirmPassword.getText().toString();
+                    // 如果手机为空
+                    if (StringUtil.getInstance().isNullOrEmpty(phone)){
+                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号不能为空");
+                        return;
+                    }
+                    // 如果手机格式有误
+//                    if (!StringUtil.getInstance().isPhone(phone)){
+//                        ToastUtil.errorMsg(RegistrationActivity.this,"手机号格式有误");
+//                        return;
+//                    }
+                    // 如果验证码为空
+                    if (StringUtil.getInstance().isNullOrEmpty(code)){
+                        ToastUtil.errorMsg(RegistrationActivity.this,"验证码不能为空");
+                        return;
+                    }
+                    // 如果密码为空
+                    if (StringUtil.getInstance().isNullOrEmpty(password)){
+                        ToastUtil.errorMsg(RegistrationActivity.this,"密码不能为空");
+                        return;
+                    }
+                    if (StringUtil.getInstance().isNullOrEmpty(confirmPassword)){
+                        ToastUtil.errorMsg(RegistrationActivity.this,"密码不能为空");
+                        return;
+                    }
+                    // 如果两次输入密码不一致
+                    if (!password.equals(confirmPassword)){
+                        ToastUtil.errorMsg(RegistrationActivity.this,"两次密码必须要一致");
+                        return;
+                    }
+
+                    // 如果以上所有信息都没有问题，发送注册请求
+                    Map<String,String> accountMap = new HashMap<>(10);
+                    SharedPreferences sessionShared = getSharedPreferences("session", MODE_PRIVATE);
+                    accountMap.put("phone",phone);
+                    accountMap.put("verityCode", code);
+                    accountMap.put("password", password);
+                    accountMap.put("sessionId",sessionShared.getString(phone,""));
+                    register(accountMap);
                     break;
             }
         }
@@ -163,6 +227,7 @@ public class RegistrationActivity extends BaseActivity {
          * 否则为 false;
          */
         private void phoneIsRegister(){
+            Log.i(TAG,"验证手机是否存在");
             Map<String,String> map = new HashMap<>(5);
             // 获取输入的手机号
             map.put("phone",registerPhone.getText().toString());
@@ -205,6 +270,35 @@ public class RegistrationActivity extends BaseActivity {
             });
         }
 
+        /**
+         * 发送注册请求
+         * @param accountMap
+         */
+        private void register(Map<String,String> accountMap){
+            Log.i(TAG,"发送注册请求");
+            RequestUtil.sendPostRequest(HttpConstant.BASE_URL + HttpConstant.REGISTER_ACCOUNT,
+                    accountMap, responseResult ->  {
+                // 状态码
+                Integer resultCode = responseResult.getCode();
+                if (resultCode.equals(CodeConstant.SERVER_ERROR)){
+                    ToastUtil.errorMsg(RegistrationActivity.this,(String)responseResult.getMsg());
+                    return;
+                }
+                if (resultCode.equals(CodeConstant.CLIENT_ERROR)){
+                    ToastUtil.errorMsg(RegistrationActivity.this,"请求失败");
+                }
+                if (resultCode.equals(CodeConstant.SERVER_SUCCESS)){
+                    // 注册成功
+                    if((Integer)responseResult.getData() > 0){
+                        Log.i(TAG,"注册成功");
+//                        ToastUtil.successMsg(RegistrationActivity.this,"注册成功");
+                        Intent intent = new Intent(RegistrationActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }
+            });
+        }
+
     }
 
 
@@ -217,8 +311,6 @@ public class RegistrationActivity extends BaseActivity {
         bindListener();
         // 注册按钮事件
         Button registerButton = findViewById(R.id.register_register);
-        registerButton.setOnClickListener(new BtnClickJumpListener(this,LoginActivity.class));
-
     }
 
     /**
@@ -245,5 +337,6 @@ public class RegistrationActivity extends BaseActivity {
      */
     private void bindListener(){
         registerSendCode.setOnClickListener(clicker);
+        registerRegister.setOnClickListener(clicker);
     }
 }
