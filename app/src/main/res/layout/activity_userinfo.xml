@@ -53,7 +53,6 @@
 
 
     <LinearLayout
-        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -65,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="名称："
+            android:textSize="20dp"
             />
 
         <EditText
@@ -72,21 +72,24 @@
             android:id="@+id/userInfo_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="性别：" />
+            android:text="性别："
+            android:textSize="20dp"/>
 
         <EditText
             android:editable="false"
             android:id="@+id/userInfo_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="邮箱：" />
+            android:text="邮箱："
+            android:textSize="20dp"/>
 
         <EditText
             android:editable="false"
             android:id="@+id/userInfo_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="电话：" />
+            android:text="电话："
+            android:textSize="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="修改密码"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
             <Button
                 android:id="@+id/userInfo_changeInfoBtn"
@@ -106,6 +110,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:text="修改信息"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
         </LinearLayout>
 
@@ -122,7 +127,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/home_page_button_action"
-            android:text="监控"
+            android:text="监   控"
+            android:textSize="25dp"
             android:visibility="visible" />
 
         <Button
@@ -131,15 +137,19 @@
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginRight="-2dp"
+            android:layout_marginBottom="-2dp"
+            android:textSize="25dp"
             android:background="@drawable/home_page_button_action"
-            android:text="我的" />
+            android:text="我   的" />
 
         <Button
             android:id="@+id/userInfo_exitLoginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/home_page_button_action"
-            android:text="退出账号" />
+            android:text="退出账号"
+            android:textSize="18dp" />
     </RelativeLayout>
 </LinearLayout>

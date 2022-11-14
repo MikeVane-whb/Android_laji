@@ -51,7 +51,11 @@ public class IndexActivity extends BaseActivity {
     /**
      * 跳转“我的”按钮
      */
-    private Button toUserInfoBtn;
+    private Button indexUserInfoBtn;
+    /**
+     * 跳转"监控"按钮
+     */
+    private Button indexIndexBtn;
     /**
      * connect按钮
      */
@@ -65,7 +69,7 @@ public class IndexActivity extends BaseActivity {
      */
     private EditText serverIp;
     /**
-     * 服务器port 输入框
+     * 服务器 port 输入框
      */
     private EditText serverPort;
     /**
@@ -109,17 +113,14 @@ public class IndexActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                //如果点击了我的
-                case R.id.index_user:
+                // 如果点击了我的
+                case R.id.index_userinfo:
                     Log.i(TAG,"onClick: 我的");
-                    String userInfoId = user.getUserInfoId();
                     //跳转页面
                     Intent intent =new Intent(IndexActivity.this,UserInfoActivity.class);
-                    //把userInfo传过去
-                    intent.putExtra("userInfoId",userInfoId);
                     startActivity(intent);
                     break;
-                //如果点击了连接按钮
+                // 如果点击了连接按钮
                 case R.id.index_connect_device:
                     Log.i(TAG,"onClick: 连接");
                     //连接按钮关闭，关闭按钮打开
@@ -130,7 +131,7 @@ public class IndexActivity extends BaseActivity {
                     client = new TcpClient(ip,Integer.parseInt(port));
                     exec.execute(client);
                     break;
-                //如果点击了关闭按钮
+                // 如果点击了关闭按钮
                 case R.id.index_close_device:
                     Log.i(TAG,"onClick: 关闭");
                     //连接按钮打开，关闭按钮关闭
@@ -138,6 +139,7 @@ public class IndexActivity extends BaseActivity {
                     closeBtn.setEnabled(false);
                     client.closeSelf();
                     break;
+                default:
             }
         }
     }
@@ -166,6 +168,7 @@ public class IndexActivity extends BaseActivity {
                     case 1:
                         temperature.setText("温度："+msg.obj.toString());
                         break;
+                    default:
                 }
             }
         }
@@ -192,6 +195,7 @@ public class IndexActivity extends BaseActivity {
                     message.obj = msg;
                     handler.sendMessage(message);
                     break;
+                default:
             }
         }
     }
@@ -205,6 +209,7 @@ public class IndexActivity extends BaseActivity {
         bindListener();
         bindReceiver();
         initView();
+        initButton();
 
         User user = (User)getIntent().getParcelableExtra("user");
         //查询实时数据，RoomInfo，默认在客厅，这里直接设置
@@ -223,7 +228,7 @@ public class IndexActivity extends BaseActivity {
     private void showInfo(User user,RoomInfo roomInfo){
         String nowTime = DateUtil.formateDateTime(new Date());
         //index_title.setText(user.getUsername()+"的家");
-        //房间信息
+        // 房间信息
         light.setText("亮度："+roomInfo.getLight());
         humidity.setText("温度："+roomInfo.getHumidity());
         temperature.setText("湿度："+roomInfo.getTemperature());
@@ -245,15 +250,15 @@ public class IndexActivity extends BaseActivity {
      * 绑定id与控件
      */
     private void bindId(){
-        toUserInfoBtn = findViewById(R.id.index_user);
         connectBtn = findViewById(R.id.index_connect_device);
         closeBtn = findViewById(R.id.index_close_device);
         serverIp = findViewById(R.id.index_device_ip);
         serverPort = findViewById(R.id.index_device_port);
-        title = findViewById(R.id.index_title);
         temperature = findViewById(R.id.index_temperature);
         humidity = findViewById(R.id.index_humidity);
         light = findViewById(R.id.index_light);
+        indexIndexBtn = findViewById(R.id.index_index);
+        indexUserInfoBtn = findViewById(R.id.index_userinfo);
     }
 
     /**
@@ -262,7 +267,13 @@ public class IndexActivity extends BaseActivity {
     private void bindListener(){
         closeBtn.setOnClickListener(clicker);
         connectBtn.setOnClickListener(clicker);
-        toUserInfoBtn.setOnClickListener(clicker);
+        indexIndexBtn.setOnClickListener(clicker);
+        indexUserInfoBtn.setOnClickListener(clicker);
+    }
+
+    private void initButton(){
+        indexIndexBtn.setEnabled(false);
+        indexUserInfoBtn.setEnabled(true);
     }
 
     /**

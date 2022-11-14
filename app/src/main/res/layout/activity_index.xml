@@ -7,26 +7,15 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_height="1dp"
+        android:orientation="horizontal"/>
 
-        <Button
-            android:id="@+id/index_back"
-            android:layout_width="108dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/home_page_button_action"
-            android:text="返回" />
-        <Button
-            android:id="@+id/index_title"
-            android:layout_width="108dp"
-            android:layout_height="match_parent"
-            android:text="首页"
-            android:layout_marginLeft="190dp"
-            android:background="@drawable/home_page_button_action"
-            />
-    </LinearLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="lj 监控系统"
+        android:textSize="30dp"
+        android:gravity="center"/>
 
 
     <LinearLayout
@@ -42,15 +31,17 @@
                 android:id="@+id/index_device_ip"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="ip："
-                android:textSize="18dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/index_connect_device"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:text="连接"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
 
         </LinearLayout>
@@ -63,16 +54,18 @@
                 android:id="@+id/index_device_port"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="port："
-                android:textSize="18dp" />
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/index_close_device"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:background="@drawable/home_page_button_action"
-                android:text="关闭" />
+                android:text="关闭"
+                android:textSize="18dp" />
 
         </LinearLayout>
 
@@ -91,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="客厅"
+            android:textSize="18dp"
             android:background="@drawable/home_page_button_action"/>
 
         <Button
@@ -99,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="卧室"
+            android:textSize="18dp"
             android:background="@drawable/home_page_button_action"/>
 
         <Button
@@ -107,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="卫生间"
+            android:textSize="18dp"
             android:background="@drawable/home_page_button_action"
             />
     </LinearLayout>
@@ -114,11 +110,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/index_temperature"
@@ -145,7 +140,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:orientation="horizontal">
 
             <Button
@@ -155,6 +150,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
                 android:text="电视"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
 
             <Button
@@ -164,6 +160,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
                 android:text="空调"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
 
             <Button
@@ -173,27 +170,40 @@
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
                 android:text="灯光"
+                android:textSize="18dp"
                 android:background="@drawable/home_page_button_action"/>
         </LinearLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginTop="50dp"
-            android:gravity="center">
+            android:gravity="top">
 
             <Button
-                android:id="@+id/index_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的"
+                android:id="@+id/index_index"
+                android:layout_width="205dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/home_page_button_action"
-                />
+                android:text="监   控"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/index_userinfo"
+                android:layout_width="205dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/home_page_button_action"
+                android:text="我   的"
+                android:textSize="25dp" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>
