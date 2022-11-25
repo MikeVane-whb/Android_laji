@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.widget.Toast;
 
 /**
+ * Toast 的常量管理
  * @Author mikevane
  * @Date 23:17
  * @Version 1.0

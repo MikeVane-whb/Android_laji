@@ -1,10 +1,7 @@
 package top.mikevane.laji.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import top.mikevane.laji.R;
 import top.mikevane.laji.ui.listener.BtnClickJumpListener;
@@ -20,7 +17,7 @@ public class HomePageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_page_activity);
+        setContentView(R.layout.activity_home_page);
 
         ToastUtil.successMsg(this,"这是主页面");
 

@@ -36,4 +36,9 @@ public class HttpConstant {
      * 发送查询用户信息请求 uri
      */
     public static final String SELECT_USERINFO = "/user/selectUserInfo";
+
+    /**
+     * 发送修改用户信息请求 uri
+     */
+    public static final String UPDATE_USERINFO = "/user/updateUserInfo";
 }

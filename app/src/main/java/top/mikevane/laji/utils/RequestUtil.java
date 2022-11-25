@@ -36,10 +36,10 @@ public class RequestUtil {
     private static final MediaType HEADER_CONTENT_TYPE = MediaType.parse("application/json;charset=utf-8");
 
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .callTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60,TimeUnit.SECONDS)
-            .writeTimeout(60,TimeUnit.SECONDS)
-            .readTimeout(60,TimeUnit.SECONDS)
+            .callTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10,TimeUnit.SECONDS)
+            .writeTimeout(10,TimeUnit.SECONDS)
+            .readTimeout(10,TimeUnit.SECONDS)
             .build();
 
     /**

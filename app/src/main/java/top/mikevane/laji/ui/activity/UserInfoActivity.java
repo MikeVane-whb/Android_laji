@@ -88,9 +88,43 @@ public class UserInfoActivity extends BaseActivity {
     private class UserInfoActivityListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
+            Intent intent = getIntent();
+            // 携带手机号
+            String phone = intent.getStringExtra("phone");
+            // 携带 sessionId
+            String sessionId = intent.getStringExtra("sessionId");
             switch (view.getId()){
                 // 修改用户信息
                 case R.id.userInfo_changeInfoBtn:
+                    Log.i(TAG,"点击修改用户信息按钮");
+                    String updateUrl = HttpConstant.BASE_URL + HttpConstant.UPDATE_USERINFO;
+                    Map<String,String> requestMap = new HashMap(8);
+                    requestMap.put("sessionId",sessionId);
+                    requestMap.put("phone",phone);
+                    requestMap.put("username",userInfoUserName.getText().toString());
+                    requestMap.put("sex",userInfoSex.getText().toString());
+                    requestMap.put("email",userInfoEmail.getText().toString());
+                    // 发送更新用户信息请求
+                    RequestUtil.sendPostRequest(updateUrl,requestMap, responseResult -> {
+                        // 获取状态码
+                        Integer code = responseResult.getCode();
+                        // 获取数据
+                        String dataCount = (String)responseResult.getData();
+                        // 如果发送请求失败
+                        if(CodeConstant.CLIENT_ERROR.equals(code)){
+                            ToastUtil.errorMsg(UserInfoActivity.this,"请求失败");
+                        }
+                        // 如果服务器出现错误
+                        if(CodeConstant.SERVER_ERROR.equals(code)){
+                            ToastUtil.errorMsg(UserInfoActivity.this,"服务器故障");
+                        }
+                        // 如果请求发送成功
+                        if(CodeConstant.SERVER_SUCCESS.equals(code)){
+//                            ToastUtil.successMsg(UserInfoActivity.this,"修改成功");
+                            flush();
+                        }
+                    });
+
                     break;
                 // 修改密码
                 case R.id.userInfo_changePwdBtn:
@@ -101,8 +135,11 @@ public class UserInfoActivity extends BaseActivity {
                 // 进入监控页面
                 case R.id.userInfo_index:
                     Log.i(TAG,"进入监控页面");
-                    Intent intent = new Intent(UserInfoActivity.this,IndexActivity.class);
-                    startActivity(intent);
+                    // 将手机号和session信息传入到下一个activity
+                    Intent nextIntent = new Intent(UserInfoActivity.this,IndexActivity.class);
+                    nextIntent.putExtra("sessionId",sessionId);
+                    nextIntent.putExtra("phone",phone);
+                    startActivity(nextIntent);
                     break;
                 default:
                     break;
@@ -197,10 +234,10 @@ public class UserInfoActivity extends BaseActivity {
         String email = userInfo.getEmail() == null ? "" : userInfo.getEmail();
         String phone = userInfo.getPhone() == null ? "" : userInfo.getPhone();
         userInfoWelcomeName.setText(username);
-        userInfoUserName.setText("名称："+username);
-        userInfoSex.setText("性别："+sex);
-        userInfoEmail.setText("邮箱："+email);
-        userInfoPhone.setText("电话："+phone);
+        userInfoUserName.setText(username);
+        userInfoSex.setText(sex);
+        userInfoEmail.setText(email);
+        userInfoPhone.setText(phone);
     }
 
 
@@ -239,5 +276,20 @@ public class UserInfoActivity extends BaseActivity {
         userInfoUserInfoBtn.setEnabled(false);
     }
 
-
+    /**
+     * 刷新页面
+     */
+    public void flush(){
+        finish();
+        Intent intent = getIntent();
+        // 携带手机号
+        String phone = intent.getStringExtra("phone");
+        // 携带 sessionId
+        String sessionId = intent.getStringExtra("sessionId");
+        // 将手机号和session信息传入到下一个activity
+        Intent nextIntent = new Intent(this,UserInfoActivity.class);
+        nextIntent.putExtra("sessionId",sessionId);
+        nextIntent.putExtra("phone",phone);
+        startActivity(nextIntent);
+    }
 }

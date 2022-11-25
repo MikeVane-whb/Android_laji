@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="top.mikevane.laji">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,15 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Laji"
-        tools:targetApi="29"
-        android:usesCleartextTraffic="true">
-
+        android:usesCleartextTraffic="true"
+        tools:targetApi="29">
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.activity.RegistrationActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.activity.IndexActivity"
             android:exported="false">
@@ -39,6 +36,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,7 +1,6 @@
 package top.mikevane.laji.ui.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -17,12 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.lang.ref.WeakReference;
 import java.util.Date;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import top.mikevane.laji.R;
 import top.mikevane.laji.manager.ThreadPoolManager;
@@ -30,6 +29,7 @@ import top.mikevane.laji.pojo.RoomInfo;
 import top.mikevane.laji.pojo.User;
 import top.mikevane.laji.socket.TcpClient;
 import top.mikevane.laji.utils.DateUtil;
+import top.mikevane.laji.utils.JsonUtil;
 
 /**
  * 信息显示模块
@@ -72,6 +72,14 @@ public class IndexActivity extends BaseActivity {
      * 服务器 port 输入框
      */
     private EditText serverPort;
+    /**
+     * 开灯 按钮
+     */
+    private Button indexOpenLightBtn;
+    /**
+     * 关灯 按钮
+     */
+    private Button indexCloseLightBtn;
     /**
      * 用户实体对象
      */
@@ -116,9 +124,17 @@ public class IndexActivity extends BaseActivity {
                 // 如果点击了我的
                 case R.id.index_userinfo:
                     Log.i(TAG,"onClick: 我的");
-                    //跳转页面
-                    Intent intent =new Intent(IndexActivity.this,UserInfoActivity.class);
-                    startActivity(intent);
+                    client.closeSelf();
+                    Intent intent = getIntent();
+                    // 携带手机号
+                    String phone = intent.getStringExtra("phone");
+                    // 携带 sessionId
+                    String sessionId = intent.getStringExtra("sessionId");
+                    // 将手机号和session信息传入到下一个activity
+                    Intent nextIntent = new Intent(IndexActivity.this,UserInfoActivity.class);
+                    nextIntent.putExtra("sessionId",sessionId);
+                    nextIntent.putExtra("phone",phone);
+                    startActivity(nextIntent);
                     break;
                 // 如果点击了连接按钮
                 case R.id.index_connect_device:
@@ -126,8 +142,8 @@ public class IndexActivity extends BaseActivity {
                     //连接按钮关闭，关闭按钮打开
                     connectBtn.setEnabled(false);
                     closeBtn.setEnabled(true);
-                    String ip = serverIp.getText().toString().substring(3);
-                    String port = serverPort.getText().toString().substring(5);
+                    String ip = serverIp.getText().toString();
+                    String port = serverPort.getText().toString();
                     client = new TcpClient(ip,Integer.parseInt(port));
                     exec.execute(client);
                     break;
@@ -138,6 +154,22 @@ public class IndexActivity extends BaseActivity {
                     connectBtn.setEnabled(true);
                     closeBtn.setEnabled(false);
                     client.closeSelf();
+                    break;
+                case R.id.index_open_light:
+                    Log.i(TAG,"onClick：打开灯");
+                    exec.execute(() -> {
+                        client.send("a");
+                    });
+                    indexCloseLightBtn.setEnabled(true);
+                    indexOpenLightBtn.setEnabled(false);
+                    break;
+                case R.id.index_close_light:
+                    Log.i(TAG,"onClick：关闭灯");
+                    exec.execute(() -> {
+                        client.send("A");
+                    });
+                    indexCloseLightBtn.setEnabled(false);
+                    indexOpenLightBtn.setEnabled(true);
                     break;
                 default:
             }
@@ -166,7 +198,24 @@ public class IndexActivity extends BaseActivity {
             if(weakReference != null){
                 switch (msg.what){
                     case 1:
-                        temperature.setText("温度："+msg.obj.toString());
+                        try {
+                            Map<String, Object> jsonToMap = JsonUtil.jsonToMap(msg.obj.toString());
+                            temperature.setText("温度："+jsonToMap.get("t"));
+                            humidity.setText("湿度："+jsonToMap.get("h"));
+                            light.setText("亮度："+jsonToMap.get("l"));
+                            // 如果 LED 处于关闭状态
+                            if(jsonToMap.get("L").equals("0")){
+                                indexCloseLightBtn.setEnabled(false);
+                                indexOpenLightBtn.setEnabled(true);
+                            }
+                            // 如果 LED 处于开启状态
+                            if(jsonToMap.get("L").equals("1")){
+                                indexCloseLightBtn.setEnabled(true);
+                                indexOpenLightBtn.setEnabled(false);
+                            }
+                        } catch (JsonProcessingException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     default:
                 }
@@ -232,7 +281,6 @@ public class IndexActivity extends BaseActivity {
         light.setText("亮度："+roomInfo.getLight());
         humidity.setText("温度："+roomInfo.getHumidity());
         temperature.setText("湿度："+roomInfo.getTemperature());
-
     }
 
     /**
@@ -257,6 +305,8 @@ public class IndexActivity extends BaseActivity {
         temperature = findViewById(R.id.index_temperature);
         humidity = findViewById(R.id.index_humidity);
         light = findViewById(R.id.index_light);
+        indexOpenLightBtn = findViewById(R.id.index_open_light);
+        indexCloseLightBtn = findViewById(R.id.index_close_light);
         indexIndexBtn = findViewById(R.id.index_index);
         indexUserInfoBtn = findViewById(R.id.index_userinfo);
     }
@@ -267,6 +317,8 @@ public class IndexActivity extends BaseActivity {
     private void bindListener(){
         closeBtn.setOnClickListener(clicker);
         connectBtn.setOnClickListener(clicker);
+        indexOpenLightBtn.setOnClickListener(clicker);
+        indexCloseLightBtn.setOnClickListener(clicker);
         indexIndexBtn.setOnClickListener(clicker);
         indexUserInfoBtn.setOnClickListener(clicker);
     }

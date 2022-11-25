@@ -24,11 +24,14 @@
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2775" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/drawable/toast_background.xml" value="0.257" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/drawable/toast_style.xml" value="0.1645" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_home_page.xml" value="0.20942883046237534" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_index.xml" value="0.25" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_index_extra.xml" value="0.20942883046237534" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_toast_test.xml" value="0.15625" />
+        <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_user_info_change.xml" value="0.20942883046237534" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/activity_userinfo.xml" value="0.25" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/home_page_activity.xml" value="0.10227272727272728" />
         <entry key="..\:/Learning/Coding/android/laji/app/src/main/res/layout/spinner_layout.xml" value="0.20923913043478262" />

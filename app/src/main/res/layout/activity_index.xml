@@ -20,52 +20,64 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="140dp"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="ip："
+                android:textSize="24dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/index_device_ip"
-                android:layout_width="240dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="ip："
-                android:textSize="20dp" />
+                android:textSize="24dp" />
 
             <Button
                 android:id="@+id/index_connect_device"
-                android:layout_width="120dp"
-                android:layout_height="45dp"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
                 android:text="连接"
-                android:textSize="18dp"
+                android:textSize="25dp"
                 android:background="@drawable/home_page_button_action"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="port："
+                android:textSize="24dp"
+                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/index_device_port"
-                android:layout_width="240dp"
+                android:layout_width="164dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="port："
-                android:textSize="20dp" />
+                android:textSize="24dp" />
 
             <Button
                 android:id="@+id/index_close_device"
-                android:layout_width="120dp"
-                android:layout_height="45dp"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/home_page_button_action"
                 android:text="关闭"
-                android:textSize="18dp" />
+                android:textSize="25dp" />
 
         </LinearLayout>
 
@@ -74,46 +86,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="客厅"
-            android:textSize="18dp"
-            android:background="@drawable/home_page_button_action"/>
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="卧室"
-            android:textSize="18dp"
-            android:background="@drawable/home_page_button_action"/>
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="卫生间"
-            android:textSize="18dp"
-            android:background="@drawable/home_page_button_action"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="300dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/index_temperature"
@@ -121,65 +99,53 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="实时显示信息:温度："
-                android:textSize="20dp"/>
+                android:textSize="30dp"/>
             <TextView
                 android:id="@+id/index_humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="实时显示信息:湿度："
-                android:textSize="20dp"/>
+                android:textSize="30dp"/>
             <TextView
                 android:id="@+id/index_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="实时显示信息:亮度："
-                android:textSize="20dp"/>
+                android:textSize="30dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/index_open_light"
+                    android:layout_width="205dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/home_page_button_action"
+                    android:text="开   灯"
+                    android:textSize="25dp" />
+
+                <Button
+                    android:id="@+id/index_close_light"
+                    android:layout_width="205dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/home_page_button_action"
+                    android:text="关   灯"
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/index_TV"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="电视"
-                android:textSize="18dp"
-                android:background="@drawable/home_page_button_action"/>
-
-            <Button
-                android:id="@+id/index_kongTiao"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="空调"
-                android:textSize="18dp"
-                android:background="@drawable/home_page_button_action"/>
-
-            <Button
-                android:id="@+id/index_light2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:text="灯光"
-                android:textSize="18dp"
-                android:background="@drawable/home_page_button_action"/>
-        </LinearLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="50dp"
             android:gravity="top">
 
             <Button
