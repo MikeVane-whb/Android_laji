@@ -3,3 +3,5 @@
 - 系统：Android
 - 技术：Java
 - IDE：Android Studio 2022
+- 客户端 github 地址：https://github.com/MikeVane-whb/Android_laji
+- 服务端 github 地址: https://github.com/MikeVane-whb/lj-server
